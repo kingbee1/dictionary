@@ -5,6 +5,7 @@ import Employee from "./components/Employee";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dictionary from "./components/Dictionary";
 import Definition from "./components/Definition";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [role, setRole] = useState("");
@@ -16,6 +17,7 @@ function App() {
     <Route path="/dictionary" element={<Dictionary />} />
     {/* <Route path="/definition" element={<Definition />} /> */}
     <Route path="/definition/:find" element={<Definition />} />
+    <Route path="/404" element= {<NotFound />} />
     </Routes>
 
     </BrowserRouter>

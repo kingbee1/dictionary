@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Definition = () => {
     //no "quotes" for the 
@@ -13,19 +13,29 @@ const Definition = () => {
     //console.log(useParams)
 
     let { find } = useParams();
+    const navigate = useNavigate ()
 
     
     useEffect(()=>{
         fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
-        .then((response) => response.json())
+        .then((response) => {
+            if(response.status === 404) {
+                navigate('/404')
+            }
+            return response.json()
+        })
         .then((data) => {
             setContainer(data [0].meanings)
            // console.log(data [0].meanings)
+        
         })
     }, [])
   return (
     <div>
-      <h1>The definition is:</h1>
+     {container ? 
+     <>
+     
+     <h1>The definition is:</h1>
      {container.map((item, def) => {
         console.log({item})
         return (
@@ -37,7 +47,8 @@ const Definition = () => {
                 </p>
             </div>
         )
-     })}
+     })}</>
+     : null}
     </div>
   )
 }
