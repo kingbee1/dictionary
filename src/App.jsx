@@ -15,6 +15,7 @@ function App() {
     <Routes>
     <Route path="/dictionary" element={<Dictionary />} />
     <Route path="/definition" element={<Definition />} />
+    <Route path="/definition/:find" element={<Definition />} />
     </Routes>
 
     </BrowserRouter>
