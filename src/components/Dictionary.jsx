@@ -17,7 +17,7 @@ const Dictionary = () => {
             setWord (e.target.value)
         }}/>
         <button onClick={()=>{
-          navigate('/definition/' + word)
+          navigate('/definition/' + word )
         }}>Find</button>
 
     </div>

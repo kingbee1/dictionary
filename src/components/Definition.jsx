@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import NotFound from './NotFound'
 
 const Definition = () => {
     //no "quotes" for the 
@@ -10,8 +11,11 @@ const Definition = () => {
     //this is because .map() function only works with arrays.
     //https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
     const [container, setContainer] = useState([])
-    //console.log(useParams)
 
+    const [notFound, setNotFound] = useState()
+   
+   
+    //console.log(useParams)
     let { find } = useParams();
     const navigate = useNavigate ()
 
@@ -20,7 +24,8 @@ const Definition = () => {
         fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
         .then((response) => {
             if(response.status === 404) {
-                navigate('/404')
+                setNotFound(true)
+                // navigate('/404')
             }
             return response.json()
         })
@@ -30,6 +35,17 @@ const Definition = () => {
         
         })
     }, [])
+
+    if (notFound === true) {
+        return (
+            <>
+            <NotFound />
+            <Link to='/dictionary'>Find another?</Link>
+            </>
+        )
+    }
+
+
   return (
     <div>
      {container ? 
