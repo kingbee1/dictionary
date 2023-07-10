@@ -10,19 +10,17 @@ const Definition = () => {
     //this is because .map() function only works with arrays.
     //https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
     const [container, setContainer] = useState([])
+    //console.log(useParams)
 
     let { find } = useParams();
 
     
     useEffect(()=>{
-        fetch('https://api.dictionaryapi.dev/api/v2/entries/en/food')
+        fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
         .then((response) => response.json())
         .then((data) => {
             setContainer(data [0].meanings)
            // console.log(data [0].meanings)
-        .catch((err) =>{
-            console.error(err)
-        })
         })
     }, [])
   return (
