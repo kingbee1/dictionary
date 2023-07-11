@@ -16,25 +16,46 @@ const Definition = () => {
    
    
     //console.log(useParams)
+    //destructure to get the data of the useParam.
     let { find } = useParams();
     const navigate = useNavigate ()
 
     
-    useEffect(()=>{
-        fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
-        .then((response) => {
-            if(response.status === 404) {
-                setNotFound(true)
-                // navigate('/404')
-            }
-            return response.json()
-        })
-        .then((data) => {
-            setContainer(data [0].meanings)
-           // console.log(data [0].meanings)
-        
-        })
-    }, [])
+    // useEffect(()=>{
+    //     fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
+    //     .then((response) => {
+    //         if(response.status === 404) {
+    //             setNotFound(true)
+    //             // navigate('/404')
+    //         }
+    //         return response.json()
+    //     })
+    //     .then((data) => {
+    //         setContainer(data [0].meanings)
+    //        // console.log(data [0].meanings)  
+    //     })
+    // }, [])
+
+
+//refactored the code above.
+useEffect(()=> {
+    getDefinition()
+}, [])
+const getDefinition = async () => {
+    const api = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + find)
+    //The await keyword is used to wait for the response from the API. 
+    //The response is assigned to the api variable.
+    //The json method is called on the api object to parse the response data as JSON. 
+    //The parsed data is assigned to the data variable.
+    const data = await api.json()
+    if(api.status === 404) {
+        setNotFound(true)
+    }
+    //console.log({data})
+    //the setContainer function updates the container state variable with data from
+    setContainer(data [0].meanings)
+}
+
 
     if (notFound === true) {
         return (
