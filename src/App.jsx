@@ -17,6 +17,7 @@ function App() {
     <Route path="/dictionary" element={<Dictionary />} />
     {/* <Route path="/definition" element={<Definition />} /> */}
     <Route path="/definition/:find" element={<Definition />} />
+    <Route path="/employees/" element={<Employee />} />
     <Route path="/404" element= {<NotFound />} />
     </Routes>
 
