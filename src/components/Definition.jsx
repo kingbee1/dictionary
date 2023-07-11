@@ -10,8 +10,9 @@ const Definition = () => {
     //i created another state to handle data from api because it keeps saying map is not a function
     //this is because .map() function only works with arrays.
     //https://www.pluralsight.com/guides/typeerror-handling-in-react.js-for-map-function
-    const [container, setContainer] = useState([])
-
+    //const [container, setContainer] = useState([])
+    //and now it works here and not there. be back.
+    //console.log({container})
     const [notFound, setNotFound] = useState()
    
    
@@ -53,9 +54,8 @@ const getDefinition = async () => {
     }
     //console.log({data})
     //the setContainer function updates the container state variable with data from
-    setContainer(data [0].meanings)
+    setWord(data [0].meanings)
 }
-
 
     if (notFound === true) {
         return (
@@ -69,18 +69,17 @@ const getDefinition = async () => {
 
   return (
     <div>
-     {container ? 
+     {word ? 
      <>
      
      <h1>The definition is:</h1>
-     {container.map((item, def) => {
+     {word.map((item, def) => {
         console.log({item})
         return (
             <div key={def}>
                 <p>
                     {item.partOfSpeech + ': '} 
                     {item?.definitions[0].definition}
-                
                 </p>
             </div>
         )
